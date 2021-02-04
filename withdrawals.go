@@ -16,6 +16,13 @@ type WithdrawalCoinbase struct {
 	CoinbaseAccountID string `json:"coinbase_account_id"`
 }
 
+type WithdrawlCryptoFeeEstimate struct {
+	Currency      string `json:"currency"`
+	CryptoAddress string `json:"crypto_address"`
+	// Response fields
+	Fee string `json:"fee,omitempty"`
+}
+
 func (c *Client) CreateWithdrawalCrypto(newWithdrawalCrypto *WithdrawalCrypto) (WithdrawalCrypto, error) {
 	var savedWithdrawal WithdrawalCrypto
 	url := fmt.Sprintf("/withdrawals/crypto")
@@ -28,4 +35,11 @@ func (c *Client) CreateWithdrawalCoinbase(newWithdrawalCoinbase *WithdrawalCoinb
 	url := fmt.Sprintf("/withdrawals/coinbase-account")
 	_, err := c.Request("POST", url, newWithdrawalCoinbase, &savedWithdrawal)
 	return savedWithdrawal, err
+}
+
+func (c *Client) GetFeeEstimate(newCryptoFeeEstimate *WithdrawlCryptoFeeEstimate) (WithdrawlCryptoFeeEstimate, error) {
+	var savedFeeEstimate WithdrawlCryptoFeeEstimate
+	url := fmt.Sprintf("/withdrawals/fee-estimate")
+	_, err := c.Request("GET", url, newCryptoFeeEstimate, &savedFeeEstimate)
+	return savedFeeEstimate, err
 }

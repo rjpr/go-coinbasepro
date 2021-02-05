@@ -8,12 +8,18 @@ type WithdrawalCrypto struct {
 	Currency      string `json:"currency"`
 	Amount        string `json:"amount"`
 	CryptoAddress string `json:"crypto_address"`
+	// Response fields
+	ID       string `json:"id,omitempty"`
+	Fee      string `json:"fee,omitempty"`
+	Subtotal string `json:"subtotal,omitempty"`
 }
 
 type WithdrawalCoinbase struct {
 	Currency          string `json:"currency"`
 	Amount            string `json:"amount"`
 	CoinbaseAccountID string `json:"coinbase_account_id"`
+	// Response fields
+	ID string `json:"id,omitempty"`
 }
 
 type WithdrawlCryptoFeeEstimate struct {
